@@ -26,7 +26,7 @@ class main:
         
         
         running = True
-        currentWindow = title()
+        currentWindow = letter()
         while running:
             # MAIN GAME LOOP
             #dt = clock.tick(60)
