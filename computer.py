@@ -12,7 +12,6 @@ from scapy.all import Ether, IP, TCP, sendp,Raw
 class computer(window.window):
     
     def __init__(self):
-
         packets = self.createPacketList()
         packet = self.create_fake_packet("Hello, the secret code is 300!","148.88.247.82")
         
@@ -24,14 +23,9 @@ class computer(window.window):
 
 
     def display(self,screen):
-
-        BLACK = (0, 0, 0)
-        WHITE = (255, 255, 255)
-        GREEN = (0, 255, 0)
-        font = pygame.font.Font(None, 30)
-        command_history = []
+        pass
         
-        command_index = -1
+
     def create_fake_packet(self,data,src_ip = None):
             # Create a fake Ethernet frame
             eth = Ether()

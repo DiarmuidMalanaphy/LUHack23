@@ -14,7 +14,7 @@ class Console(window.window):
     def display(self, screen):
         self.consoleScreen.fill((0, 0, 0))
         font = pygame.font.Font(None, 32)
-        tmp = "\n".join(self.cTxt) + "\n" + self.cLine
+        tmp = "\r\n".join(self.cTxt) + "\r\n" + self.cLine
         txtSurf = font.render(tmp, True, (255, 255, 255))
 
         self.consoleScreen.blit(txtSurf, (10, 10))
