@@ -1,9 +1,8 @@
 import pygame
 import numpy
 
-from letter import letter
-from title import title
-from Console import Console
+from door import door
+from windowManager import windowManager
 
 class main:
     
@@ -26,23 +25,26 @@ class main:
         
         
         running = True
-        currentWindow = Console()
+        manager = windowManager(door())
+        
         while running:
+            currentWindow = manager.getCurrentWindow()
             # MAIN GAME LOOP
             #dt = clock.tick(60)
             #dt = dt/40
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-                
-                currentWindow.check_event(event)
+                #Cursed but might work, will always return None
+                new_window = currentWindow.check_event(event)
+                manager.changeCurrentWindow(new_window)
                 
                     
                                   
                       
             # Get state of all keys
             keys = pygame.key.get_pressed()
-            self.screen.fill((0, 0, 0))
+            # self.screen.fill((0, 0, 0))
             currentWindow.display(self.screen)
             
             
