@@ -33,6 +33,9 @@ class main:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    # Check if button is clicked
+                    currentWindow.check_button_click(event.pos)
                 
                     
                                   

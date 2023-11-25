@@ -1,4 +1,4 @@
-import cv2
+
 
 
 class window:
@@ -7,4 +7,6 @@ class window:
         pass
 
     def display(self, screen):#override this and implement it yourself
-        raise "Implement yourself"
+        raise Exception ("Implement yourself")
+    def checkButtonClick(self,pos):
+        raise Exception ("Implement yourself")
