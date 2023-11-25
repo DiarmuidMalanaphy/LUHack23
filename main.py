@@ -3,7 +3,7 @@ import numpy
 
 from letter import letter
 from title import title
-
+from Console import Console
 
 class main:
     
@@ -11,8 +11,8 @@ class main:
 
 
         pygame.init()
-        SCREEN_WIDTH = 1024
-        SCREEN_HEIGHT = 524
+        SCREEN_WIDTH = 1280
+        SCREEN_HEIGHT = 720
         
         self.screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
         
@@ -26,7 +26,7 @@ class main:
         
         
         running = True
-        currentWindow = letter()
+        currentWindow = Console()
         while running:
             # MAIN GAME LOOP
             #dt = clock.tick(60)
