@@ -10,6 +10,7 @@ class letter(window.window):
         self.shiftNumber = 0
         # <- the image is oriented like this.
         self.arrowImage = pygame.image.load('Arrow.png')  # Replace with your image file
+        self.input_text = ""
         
 
 
@@ -22,13 +23,41 @@ class letter(window.window):
             screen.blit(text_surface, (screen.get_width()/4, y))
             y += line_spacing  # Move y to the next line
 
-        self.backArrowButton = self.arrowImage.get_rect(center=(screen.get_height()/3*2, screen.get_height() / 2))
+        
+
+        self.backArrowButton = self.arrowImage.get_rect(center=(screen.get_width() / 2, screen.get_height() * 3 / 4))
         screen.blit(self.arrowImage, self.backArrowButton.topleft)
     
-    def check_button_click(self, mouse_pos):
-        if self.backArrowButton.collidepoint(mouse_pos):
-            # Perform an action when the button is clicked
-            print("Back arrow clicked!")
+    def check_event(self, event):
+        if event.type == pygame.MOUSEBUTTONDOWN:
+        
+            if self.backArrowButton.collidepoint(event.pos):
+                # Perform an action when the button is clicked
+                print("Back arrow clicked!")
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RETURN:
+                # When Enter is pressed, set the Caesar shift number
+                if self.input_text.isdigit():
+                    self.shiftNumber = int(self.input_text)
+                    print("Shift number set to:", self.shiftNumber)
+                self.input_text = ''  # Optionally clear the input box
+            elif event.key == pygame.K_BACKSPACE:
+                self.input_text = self.input_text[:-1]
+            elif event.unicode.isdigit():
+                # Append the input if it's a digit
+                self.input_text += event.unicode
+            elif event.key == pygame.K_UP:
+                if self.input_text == '':
+                    self.input_text = '0'
+                self.input_text = str (int(self.input_text) + 1)
+                self.shiftNumber = int(self.input_text)
+            elif event.key == pygame.K_DOWN:
+                if self.input_text == '':
+                    self.input_text = '0'
+                if int(self.input_text)>0:
+                    self.input_text = str(int(self.input_text)-1)
+                    self.shiftNumber = int(self.input_text)
+        
         
         
         
