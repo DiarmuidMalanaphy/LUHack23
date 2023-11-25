@@ -2,6 +2,7 @@ import pygame
 import numpy
 
 from letter import letter
+from title import title
 
 
 class main:
@@ -16,7 +17,7 @@ class main:
         self.screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
         
         pygame.display.set_caption("Hopkins Secret")
-        icon_image = pygame.image.load("hopkinsSecret.jpg")
+        icon_image = pygame.image.load("hopkinsSecret.jpg").convert()
         pygame.display.set_icon(icon_image)
         
         
