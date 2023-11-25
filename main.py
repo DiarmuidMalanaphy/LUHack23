@@ -2,6 +2,7 @@ import pygame
 import numpy
 
 from door import door
+from forensic import forensic
 from windowManager import windowManager
 
 class main:
@@ -25,7 +26,7 @@ class main:
         
         
         running = True
-        manager = windowManager(door())
+        manager = windowManager(forensic())
         
         while running:
             currentWindow = manager.getCurrentWindow()
