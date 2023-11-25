@@ -1,6 +1,8 @@
 import pygame
 import numpy
 
+from letter import letter
+
 
 class main:
     
@@ -16,18 +18,19 @@ class main:
         pygame.display.set_caption("Hopkins Secret")
         icon_image = pygame.image.load("hopkinsSecret.jpg")
         pygame.display.set_icon(icon_image)
-        #self.image = pygame.image.load("hopkinsSecret.jpg")
         
-        
+        font = pygame.font.Font("Pixtura12.ttf", 36)
+        text = font.render('Your text here', True, (255, 0, 0))  # Red color
         clock = pygame.time.Clock()
         
         
         
         running = True
+        currentWindow = letter()
         while running:
             # MAIN GAME LOOP
-            dt = clock.tick(60)
-            dt = dt/40
+            #dt = clock.tick(60)
+            #dt = dt/40
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
@@ -39,7 +42,7 @@ class main:
             keys = pygame.key.get_pressed()
             self.screen.fill((0, 0, 0))
             
-            #self.screen.blit(self.image, (0, 0))
+            
         
 
             pygame.display.flip()
