@@ -3,7 +3,7 @@ import numpy
 
 from letter import letter
 from title import title
-
+from Console import Console
 
 class main:
     
@@ -26,7 +26,7 @@ class main:
         
         
         running = True
-        currentWindow = letter()
+        currentWindow = Console()
         while running:
             # MAIN GAME LOOP
             #dt = clock.tick(60)
