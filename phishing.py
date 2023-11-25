@@ -17,12 +17,9 @@ class phishing(window.window):
             y += line_spacing  # Move y to the next line
         
 
-    def renderText(self,text):
+    def check_event(self, event):
+        if event.type == pygame.MOUSEBUTTONDOWN:
         
-        words = text.split()
-        chunk_size = 6
-        chunks = [' '.join(words[i:i+chunk_size]) for i in range(0, len(words), chunk_size)]
-
-        rendered_texts = [self.font.render(chunk, True, (255, 0, 0)) for chunk in chunks]
-
-        return rendered_texts
+            if self.backArrowButton.collidepoint(event.pos):
+                # Perform an action when the button is clicked
+                print("Back arrow clicked!")

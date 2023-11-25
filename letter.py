@@ -11,6 +11,8 @@ class letter(window.window):
         # <- the image is oriented like this.
         self.arrowImage = pygame.image.load('Arrow.png')  # Replace with your image file
         self.input_text = ""
+    
+
         
 
 
@@ -25,7 +27,7 @@ class letter(window.window):
 
         
 
-        self.backArrowButton = self.arrowImage.get_rect(center=(screen.get_width() / 5, screen.get_height() * 3 / 4 + 20))
+        self.backArrowButton = self.arrowImage.get_rect(center=(screen.get_width() / 4, screen.get_height() * 2 / 4 ))
         screen.blit(self.arrowImage, self.backArrowButton.topleft)
     
     def check_event(self, event):
@@ -33,7 +35,8 @@ class letter(window.window):
         
             if self.backArrowButton.collidepoint(event.pos):
                 # Perform an action when the button is clicked
-                print("Back arrow clicked!")
+                return((True,None))
+                
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
                 # When Enter is pressed, set the Caesar shift number

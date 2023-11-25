@@ -9,15 +9,17 @@ from scapy.all import Ether, IP, TCP, sendp,Raw
 
 
 
-class computer(window.window):
+class packetSniffing(window.window):
     
     def __init__(self):
-        packets = self.createPacketList()
-        packet = self.create_fake_packet("Hello, the secret code is 300!","148.88.247.82")
+        self.packets = self.createPacketList()
+        truepacket = self.create_fake_packet("Hello, the secret code is 300!","192.88.247.82")
+        hopkinPacket = self.create_fake_packet("Hopkins has done something","192.88.247.82")
         
-        packets[43] = packet
-
-        print(packets)
+        self.packets[43] = truepacket
+        self.packets[12] = hopkinPacket
+        print(self.search("192.88.247.82"))
+        #print(self.packets)
         
         
 
@@ -67,6 +69,17 @@ class computer(window.window):
             packets.append(self.create_fake_packet(pleasantry))
             
         return(packets)
+    
+    def search(self, ip):
+        matching_packets = []
+        for packet in self.packets:
+            # Extract the source IP address from the packet string
+            packet_ip = packet.split(' ')[1]
+            if packet_ip == ip:
+                matching_packets.append(packet)
+        return matching_packets
+    
 
     
-computer()
+    
+packetSniffing()
