@@ -19,8 +19,7 @@ class main:
         icon_image = pygame.image.load("hopkinsSecret.jpg")
         pygame.display.set_icon(icon_image)
         
-        font = pygame.font.Font("Pixtura12.ttf", 36)
-        text = font.render('Your text here', True, (255, 0, 0))  # Red color
+        
         clock = pygame.time.Clock()
         
         
@@ -41,6 +40,7 @@ class main:
             # Get state of all keys
             keys = pygame.key.get_pressed()
             self.screen.fill((0, 0, 0))
+            currentWindow.display(self.screen)
             
             
         
