@@ -1,15 +1,13 @@
 import pygame
 import window
-import time
 
 
 class Console(window.window):
 
     def __init__(self):
-        self.cTxt = []      # Console Text
-        self.cLine = "> "     # Console line (current)
+        self.cTxt = ["Console v1.0"]    # Console Text
+        self.cLine = "> "               # Console line (current)
         self.consoleScreen = pygame.display.set_mode((800, 600))
-        
 
     def display(self, screen):
         self.consoleScreen.fill((0, 0, 0))
@@ -19,12 +17,9 @@ class Console(window.window):
 
         self.consoleScreen.blit(txtSurf, (10, 10))
         pygame.display.flip()
-        
+
         pass
-       
-                
-            
-        
+
     def check_event(self, event):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
@@ -38,12 +33,6 @@ class Console(window.window):
                 self.cTxt = self.cTxt[:-1]
             else:
                 self.cLine += event.unicode
-        
-
-        
-
-        
-        
 
     def processCmd(self, cmd):
         pass
