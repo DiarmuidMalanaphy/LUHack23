@@ -2,6 +2,7 @@ import os
 import pygame
 import numpy
 from Console import Console
+from Padlock import Padlock
 
 from door import door
 from finalScene import finalScene
@@ -38,7 +39,7 @@ class main:
         
         
         running = True
-        manager = windowManager(door())
+        manager = windowManager(finalScene())
         self.font = pygame.font.Font(None, 60)
         clock_started = False
         time_remaining = 20*60
@@ -48,9 +49,6 @@ class main:
         sound.set_volume(0.7)
         sound.play()
         while running:
-
-            
-
             currentWindow = manager.getCurrentWindow()
             # MAIN GAME LOOP
             dt = clock.tick(60)
