@@ -20,7 +20,10 @@ class main:
 
         try:
             os.rename('doorOpening1.mp3', 'doorOpening.mp3')
-            os.rename('pleasantries')
+        except:
+            pass
+        try:
+            os.rename('pleasantries1.csv',"pleasantries.csv")
         except:
             pass
         pygame.display.set_caption("Hopkins Secret")

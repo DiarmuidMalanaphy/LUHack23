@@ -1,3 +1,4 @@
+import os
 import pygame
 import window
 import time
@@ -89,6 +90,10 @@ class Console(window.window):
                 if bool: # To break the commandline
                     
                     pygame.display.set_mode((self.original_size))
+                    try:
+                        os.rename('pleasantries.csv','pleasantries1.csv')
+                    except:
+                        pass
                     return(True,None)
                 self.cLine = self.prompt + " "
             elif event.key == pygame.K_TAB:

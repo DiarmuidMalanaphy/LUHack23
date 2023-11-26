@@ -10,7 +10,7 @@ class letter(window.window):
         self.text = "Julius Caesar used to encrypt his messages using this cipher, all the letters are shifted by a certain number, a becomes z, b becomes a. That being said, this puzzle is your introduction. He is coming. The code to the monitor is thirty-nine thousand?"
         self.shiftNumber = 3
         # <- the image is oriented like this.
-        self.arrowImage = pygame.image.load('Arrow.png')  # Replace with your image file
+        self.arrowImage = pygame.image.load('blackArrow.png')  # Replace with your image file
         self.input_text = ""
         self.dialImg = pygame.image.load("dial.png")
         self.dialDrag = False
