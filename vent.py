@@ -9,8 +9,8 @@ import monitor
 import window
 class vent(window.window):
     def __init__(self):
-        self.backgroundImg = pygame.image.load("vent.png")
-        self.arrowImage = pygame.image.load('Arrow.png')
+        self.backgroundImg = pygame.image.load("./assets/images/vent.png")
+        self.arrowImage = pygame.image.load('./assets/images/Arrow.png')
 
     def display(self, screen):
         screen.blit(self.backgroundImg, (0, 0))
@@ -25,7 +25,7 @@ class vent(window.window):
         screen.blit(flipped_arrow_image, self.rightArrowButton.topleft)
 
 
-        riddleProposition = pygame.image.load("riddleProposition.png")  # Replace with the actual file path
+        riddleProposition = pygame.image.load("./assets/images/riddleProposition.png")  # Replace with the actual file path
 
 
         # Get the rect of the image and set its center to the middle of the screen
@@ -35,7 +35,7 @@ class vent(window.window):
         screen.blit(riddleProposition, self.riddlePropositionRect.topleft)
 
         
-        self.backgroundImg = pygame.image.load("vent.png")
+        self.backgroundImg = pygame.image.load("./assets/images/vent.png")
 
 
     def check_event(self, event):
@@ -52,7 +52,7 @@ class vent(window.window):
             
             vent = pygame.Rect(143, 358, 900, 302)
             if vent.collidepoint(event.pos):
-                self.backgroundImg = pygame.image.load("ventmon.png")
+                self.backgroundImg = pygame.image.load("./assets/images/ventmon.png")
 
     
             print(event.pos)
