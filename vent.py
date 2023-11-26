@@ -22,6 +22,7 @@ class vent(window.window):
         flipped_arrow_image = pygame.transform.flip(self.arrowImage, True, False)  # Flip the image
         self.rightArrowButton = flipped_arrow_image.get_rect(center=(screen.get_width() * 3 / 4, screen.get_height() *3/ 4))
         screen.blit(flipped_arrow_image, self.rightArrowButton.topleft)
+        self.backgroundImg = pygame.image.load("vent.png")
 
 
     def check_event(self, event):
@@ -32,6 +33,12 @@ class vent(window.window):
                 return(False,monitor.monitor())
             if self.rightArrowButton.collidepoint(event.pos):
                 return(False,door.door())
+            
+            vent = pygame.Rect(143, 358, 900, 302)
+            if vent.collidepoint(event.pos):
+                self.backgroundImg = pygame.image.load("ventmon.png")
+
+    
             print(event.pos)
             
                     

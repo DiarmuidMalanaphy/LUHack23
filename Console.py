@@ -6,14 +6,15 @@ from packet_Sniffing import packetSniffing
 
 class Console(window.window):
 
-    def __init__(self, screen):
+    def __init__(self):
         self.cTxt = ["Server Console"]      # Console Text
         self.prompt = ">"
         self.cLine = self.prompt + " "      # Console line (current)
         self.width = 800
-        self.height = 600
+        self.height = 600#
+        self.original_size = (pygame.display.get_window_size())
         self.consoleScreen = pygame.display.set_mode((self.width, self.height))
-        self.screen = screen
+        
 
     def add2Console(self, lines):
         for line in lines:
@@ -21,6 +22,8 @@ class Console(window.window):
         self.display(self.screen)
 
     def display(self, screen):
+        
+        self.screen = screen
         self.consoleScreen.fill((0, 0, 0))
         # font = pygame.font.Font("Monospace", 32)
         font = pygame.font.Font(None, 24)
@@ -82,7 +85,11 @@ class Console(window.window):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
                 self.cTxt.append(self.cLine)
-                self.processCmd(self.cLine[2:])
+                bool = self.processCmd(self.cLine[2:])
+                if bool: # To break the commandline
+                    
+                    pygame.display.set_mode((self.original_size))
+                    return(True,None)
                 self.cLine = self.prompt + " "
             elif event.key == pygame.K_TAB:
                 # Autocomplete?
@@ -103,7 +110,8 @@ class Console(window.window):
                 self.add2Console([
                     "HELP MENU",
                     "    packetSniffer        Prints out a list of packet data to the console, or packets sent by a specific IP",
-                    "                                      Usage: packetSniffer %ip%;  E.g. packetSniffer 248.171.41.105"
+                    "                                      Usage: packetSniffer %ip%;  E.g. packetSniffer 248.171.41.105",
+                    "    exit                       Exits the console"
                     ])
             case "packetSniffer":
                 if len(cmd) == 1:
@@ -117,6 +125,8 @@ class Console(window.window):
                     else:
                         for packet in packets:
                             self.add2Console([packet])
+            case "exit":
+                return(True)
             case other:
                 self.add2Console(["Command not found! Type \"help\" (without quotes) for more information."])
         pass

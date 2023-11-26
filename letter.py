@@ -12,7 +12,7 @@ class letter(window.window):
         # <- the image is oriented like this.
         self.arrowImage = pygame.image.load('Arrow.png')  # Replace with your image file
         self.input_text = ""
-    
+        
 
         
 
