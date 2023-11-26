@@ -3,6 +3,7 @@ import numpy
 from Console import Console
 
 from door import door
+from forensic import forensic
 from windowManager import windowManager
 
 class main:
