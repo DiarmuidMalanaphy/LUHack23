@@ -23,11 +23,12 @@ class Console(window.window):
         self.display(self.screen)
 
     def display(self, screen):
-        
         self.screen = screen
-        self.screen.fill((0, 0, 0))
-        #self.consoleScreen.fill((0, 0, 0))
-        # font = pygame.font.Font("Monospace", 32)
+        self.screen.blit(pygame.image.load("monitor.png"), (0,0))
+        bgOverlay = pygame.Surface((self.width, self.height))
+        bgOverlay.fill((0, 0, 0))
+        bgOverlay.set_alpha(230)
+        self.screen.blit(bgOverlay, (0,0))
         font = pygame.font.Font(None, 24)
 
         lineGap = 8         # Pixels between each line
