@@ -1,12 +1,13 @@
 
+import time
 import pygame
 import window
 
 class letter(window.window):
     def __init__(self):
         self.backgroundImg = pygame.image.load("parchment_alpha.png")
-        self.font = pygame.font.Font("Pixtura12.ttf", 36)
-        self.text = "The code is thirty-nine thousand?"
+        self.font = pygame.font.Font("Pixtura12.ttf", 32)
+        self.text = "Julius Caesar used to encrypt his messages using this cipher, all the letters are shifted by a certain number, a becomes z, b becomes a. That being said, this puzzle is your introduction. He is coming. The code to the monitor is thirty-nine thousand?"
         self.shiftNumber = 3
         # <- the image is oriented like this.
         self.arrowImage = pygame.image.load('Arrow.png')  # Replace with your image file
@@ -18,8 +19,8 @@ class letter(window.window):
 
     def display(self,screen):
         
-        screen.blit(self.backgroundImg, (screen.get_height()/4, 0))
-        y = 80
+        screen.blit(self.backgroundImg, (screen.get_height()*3/8, 110))
+        y = 190
         line_spacing = 40
         for text_surface in self.renderText(self.caesarText(self.text,self.shiftNumber)):
             screen.blit(text_surface, (screen.get_width()/4, y))
@@ -27,7 +28,7 @@ class letter(window.window):
 
         
 
-        self.backArrowButton = self.arrowImage.get_rect(center=(screen.get_width() / 4, screen.get_height() * 2 / 4 ))
+        self.backArrowButton = self.arrowImage.get_rect(center=(screen.get_width() / 4, screen.get_height() * 2 / 4 + 200 ))
         screen.blit(self.arrowImage, self.backArrowButton.topleft)
     
     def check_event(self, event):
@@ -35,7 +36,30 @@ class letter(window.window):
         
             if self.backArrowButton.collidepoint(event.pos):
                 # Perform an action when the button is clicked
+                pygame.mixer.init()
+                scaryVoice = pygame.mixer.Sound("warning.mp3")#
+                sound = pygame.mixer.Sound("scarynoise.mp3")
+                sound.set_volume(0.4)
+                scaryVoice.play()
+
+            
+                
+                sound.play()
+                time.sleep(1)
+                sound.set_volume(0.6)
+                time.sleep(1)
+                sound.set_volume(0.8)
+                time.sleep(1)
+
+                # Restore the volume if needed
+                sound.set_volume(1.0)
                 return((True,None))
+            if self.input_text == '':
+                    self.input_text = '0'
+            self.input_text = str (int(self.input_text) + 1)
+            self.shiftNumber = int(self.input_text)
+            
+            
                 
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
@@ -70,7 +94,7 @@ class letter(window.window):
 
     def renderText(self,text):  
         words = text.split()
-        chunk_size = 4
+        chunk_size = 5
         chunks = [' '.join(words[i:i+chunk_size]) for i in range(0, len(words), chunk_size)]
         rendered_texts = [self.font.render(chunk, True, (255, 0, 0)) for chunk in chunks]
         return rendered_texts
