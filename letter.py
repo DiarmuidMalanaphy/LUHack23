@@ -12,12 +12,17 @@ class letter(window.window):
         # <- the image is oriented like this.
         self.arrowImage = pygame.image.load('Arrow.png')  # Replace with your image file
         self.input_text = ""
-        
+        self.dialImg = pygame.image.load("dial.png")
+        self.dialDrag = False
+    
 
         
 
 
     def display(self,screen):
+        # Dial
+        self.dialButton = self.dialImg.get_rect(center=(screen.get_width()*3 / 4, screen.get_height()*2 /4 ))
+        screen.blit(self.dialImg, self.dialButton)
         
         screen.blit(self.backgroundImg, (screen.get_height()*3/8, 110))
         y = 190
@@ -59,8 +64,33 @@ class letter(window.window):
             self.input_text = str (int(self.input_text) + 1)
             self.shiftNumber = int(self.input_text)
             
+            if self.dialButton.collidepoint(event.pos):
+                self.dialDrag = True
+                self.mouseX, self.mouseY = event.pos
+                self.offsetX = self.dialButton.x - self.mouseX
+                self.offsetY = self.dialButton.y - self.mouseY
+                # self.shiftNumber += 1
+                # self.caesarText(self.text, self.shiftNumber)
             
                 
+        elif event.type == pygame.MOUSEBUTTONUP:
+            self.dialDrag = False
+        elif event.type == pygame.MOUSEMOTION:
+            if self.dialDrag:
+                self.mouseX, self.mouseY = event.pos
+                offsetX = self.dialButton.x - self.mouseX
+                offsetY = self.dialButton.y - self.mouseY
+
+                # self.offsetX = self.dialButton.x - self.mouseX
+                # self.offsetY = self.dialButton.y - self.mouseY
+                print("X: " + str(self.offsetX) + "   Y:" + str(self.offsetY))
+                print("X: " + str(offsetX) + "   Y:" + str(offsetY))
+                if (offsetX + offsetY) - (self.offsetX + self.offsetY) > 0:
+                    self.shiftNumber += 1
+                else:
+                    self.shiftNumber -= 1
+                self.offsetX = offsetX
+                self.offsetY = offsetY
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
                 # When Enter is pressed, set the Caesar shift number

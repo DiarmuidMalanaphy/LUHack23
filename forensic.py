@@ -9,8 +9,12 @@ class forensic(window.window):
         self.input_text = ""
         self.guess = ""
         self.solution = "192.88.247.82"
+        self.textbox = pygame.Surface((100,100))
+        # self.textbox = pygame.Rect(100,100,140,32)
+        self.textboxActive = False
 
     def display(self,screen):
+        self.backgroundImg = pygame.transform.scale(self.backgroundImg, (700,700))
         screen.blit(self.backgroundImg, (screen.get_height()/4, 0))
         y = 30
         line_spacing = 40
@@ -19,12 +23,17 @@ class forensic(window.window):
         #     y += line_spacing  # Move y to the next line        
         self.backArrowButton = self.arrowImage.get_rect(center=(screen.get_width() / 5, screen.get_height() * 3 / 4 + 20))
         screen.blit(self.arrowImage, self.backArrowButton.topleft)
+        # self.textboxi = self.textbox.get_rect(center=(screen.get_width()/5, screen.get_height() * 3 / 4 + 20))
+        # screen.blit(self.textbox, (650,650))
 
     def check_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.backArrowButton.collidepoint(event.pos):
                 # Perform an action when the button is clicked
                 print("Back arrow clicked!")
+            #     self.textboxActive = False
+            # elif self.textbox.collidepoint(event.pos):
+            #     self.textboxActive = True
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
                 # When Enter is pressed, set the guess
