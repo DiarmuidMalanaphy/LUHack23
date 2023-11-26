@@ -26,7 +26,7 @@ class Console(window.window):
 
     def display(self, screen):
         self.screen = screen
-        self.screen.blit(pygame.image.load("monitor.png"), (0,0))
+        self.screen.blit(pygame.image.load("./assets/images/monitor.png"), (0,0))
         bgOverlay = pygame.Surface((self.width, self.height))
         bgOverlay.fill((0, 0, 0))
         bgOverlay.set_alpha(230)
@@ -94,7 +94,7 @@ class Console(window.window):
                     bool = self.processCmd(self.cLine[9:])
                     if bool: # To break the commandline
                         
-                        pygame.display.set_mode((self.original_size))
+                        #pygame.display.set_mode((self.original_size))
                         try:
                             os.rename('pleasantries.csv','pleasantries1.csv')
                         except:

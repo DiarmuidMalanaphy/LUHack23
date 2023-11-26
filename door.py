@@ -7,16 +7,19 @@ import window
 
 class door(window.window):
     def __init__(self):
-        self.backgroundImg = pygame.image.load("door.png")
-        self.arrowImage = pygame.image.load('Arrow.png')
-        self.paperSlipImage = pygame.image.load("paper_slip.png")  # Load the paper slip image
+        self.backgroundImg = pygame.image.load("./assets/images/door.png")
+        self.arrowImage = pygame.image.load('./assets/images/Arrow.png')
+        self.paperSlipImage = pygame.image.load("./assets/images/paper_slip.png")  # Load the paper slip image
         self.paperSlipButton = None 
-        self.padlock = pygame.Rect(980, 450, 80, 100)
+        self.padlockImg = pygame.image.load("./assets/images/keypad.jpg")
+        self.padlockImg = pygame.transform.scale(self.padlockImg, (80, 100))
 
     def display(self, screen):
         screen.blit(self.backgroundImg, (0, 0))
         
-        pygame.draw.rect(screen, (255, 255, 255), self.padlock)
+
+        self.padlockButton = self.padlockImg.get_rect(center=(950, 430))
+        screen.blit(self.padlockImg, self.padlockButton.topleft)
 
         # Left Arrow Button
         self.leftArrowButton = self.arrowImage.get_rect(center=(screen.get_width() / 8, screen.get_height() *2 / 4 +10))
@@ -34,28 +37,21 @@ class door(window.window):
 
     def check_event(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
-        
-            
+
+
             if self.leftArrowButton.collidepoint(event.pos):
                 return(False,vent())
             if self.rightArrowButton.collidepoint(event.pos):
                 return(False,monitor())
-            
-           
+
+
             if self.paperSlipButton and self.paperSlipButton.collidepoint(event.pos):
                 return(False,letter())
-            if self.padlock.collidepoint(event.pos):
+            if self.padlockButton.collidepoint(event.pos):
                 return(False, Padlock())
-                    
-        
+
+
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
                 return((False,letter()))
-        
-            
-        
-        
-            
-        
-        
-                
+

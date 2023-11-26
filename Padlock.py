@@ -5,7 +5,7 @@ from finalScene import finalScene
 class Padlock(window.window):
 
     def __init__(self):
-        self.keypadImage = pygame.image.load('keypad.jpg')
+        self.keypadImage = pygame.image.load('./assets/images/keypad.jpg')
         self.code = ""
         self.numClicked = 0
 
@@ -91,7 +91,6 @@ class Padlock(window.window):
             elif hash.collidepoint(event.pos):
                 self.code = []
                 self.numClicked = 0
-            
             if self.numClicked == 4:
                 if self.code == "2000":
                     return((False, finalScene()))

@@ -8,16 +8,16 @@ import window
 
 class monitor(window.window):
     def __init__(self):
-        self.backgroundImg = pygame.image.load("monitor.png")
-        self.arrowImage = pygame.image.load('Arrow.png')
+        self.backgroundImg = pygame.image.load("./assets/images/monitor.png")
+        self.arrowImage = pygame.image.load('./assets/images/Arrow.png')
         try:
             pygame.mixer.init()
-            doorOpening = pygame.mixer.Sound("doorOpening.mp3")
-            os.rename('doorOpening.mp3', 'doorOpening1.mp3')
+            doorOpening = pygame.mixer.Sound("./assets/audio/doorOpening.mp3")
+            os.rename('./assets/audio/doorOpening.mp3', './assets/audio/doorOpening1.mp3')
             doorOpening.play()
         except Exception:
             pygame.mixer.init()
-            doorOpening = pygame.mixer.Sound("behindYou.mp3")
+            doorOpening = pygame.mixer.Sound("./assets/audio/behindYou.mp3")
             doorOpening.play()
             pass
 
@@ -54,11 +54,3 @@ class monitor(window.window):
             if event.key == pygame.K_RETURN:
                 pass
                 # return((False,letter()))
-            
-        
-        
-        
-            
-        
-        
-                

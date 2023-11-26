@@ -2,10 +2,10 @@ import pygame
 import window
 class forensic(window.window):
     def __init__(self):
-        self.backgroundImg = pygame.image.load("translatepic.png")
+        self.backgroundImg = pygame.image.load("./assets/images/translatepic.png")
         # self.font = pygame.font.Font("Pixtura12.ttf", 36)
         self.text = "Forensic ling puzzle text here"
-        self.arrowImage = pygame.image.load("whiteArrow.png")
+        self.arrowImage = pygame.image.load("./assets/images/whiteArrow.png")
         self.input_text = ""
         self.guess = ""
         self.solution = "192.88.247.82"
@@ -49,21 +49,18 @@ class forensic(window.window):
                 self.input_text = ''  # Optionally clear the input box
             elif event.key == pygame.K_BACKSPACE:
                 self.input_text = self.input_text[:-1]
+            elif event.key == pygame.K_ESCAPE:
+                return((True, None))
             elif event.unicode.isdigit() or event.unicode == ".":
                 # Append the input
                 self.input_text += event.unicode
-            
-
-
 
     # def renderText(self,text):
-        
     #     words = text.split()
     #     chunk_size = 6
     #     chunks = [' '.join(words[i:i+chunk_size]) for i in range(0, len(words), chunk_size)]
-
     #     rendered_texts = [self.font.render(chunk, True, (255, 0, 0)) for chunk in chunks]
-
     #     return rendered_texts
-    
+
+
 forensic()

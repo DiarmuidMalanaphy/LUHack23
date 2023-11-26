@@ -5,14 +5,14 @@ import window
 
 class letter(window.window):
     def __init__(self):
-        self.backgroundImg = pygame.image.load("parchment_alpha.png")
+        self.backgroundImg = pygame.image.load("./assets/images/parchment_alpha.png")
         self.font = pygame.font.Font("Pixtura12.ttf", 32)
         self.text = "Julius Caesar used to encrypt his messages using this cipher, all the letters are shifted by a certain number, a becomes z, b becomes a. That being said, this puzzle is your introduction. He is coming. The code to the monitor is thirty-nine thousand?"
         self.shiftNumber = 3
         # <- the image is oriented like this.
-        self.arrowImage = pygame.image.load('blackArrow.png')  # Replace with your image file
+        self.arrowImage = pygame.image.load('./assets/images/blackArrow.png')  # Replace with your image file
         self.input_text = ""
-        self.dialImg = pygame.image.load("dial.png")
+        self.dialImg = pygame.image.load("./assets/images/dial.png")
         self.dialDrag = False
     
 
@@ -20,11 +20,11 @@ class letter(window.window):
 
 
     def display(self,screen):
+        screen.blit(self.backgroundImg, (screen.get_height()*3/8, 110))
         # Dial
         self.dialButton = self.dialImg.get_rect(center=(screen.get_width()*3 / 4, screen.get_height()*2 /4 ))
         screen.blit(self.dialImg, self.dialButton)
         
-        screen.blit(self.backgroundImg, (screen.get_height()*3/8, 110))
         y = 190
         line_spacing = 40
         for text_surface in self.renderText(self.caesarText(self.text,self.shiftNumber)):
@@ -42,8 +42,8 @@ class letter(window.window):
             if self.backArrowButton.collidepoint(event.pos):
                 # Perform an action when the button is clicked
                 pygame.mixer.init()
-                scaryVoice = pygame.mixer.Sound("warning.mp3")#
-                sound = pygame.mixer.Sound("scarynoise.mp3")
+                scaryVoice = pygame.mixer.Sound("./assets/audio/warning.mp3")#
+                sound = pygame.mixer.Sound("./assets/audio/scarynoise.mp3")
                 sound.set_volume(0.4)
                 scaryVoice.play()
 
@@ -78,8 +78,6 @@ class letter(window.window):
 
                 # self.offsetX = self.dialButton.x - self.mouseX
                 # self.offsetY = self.dialButton.y - self.mouseY
-                print("X: " + str(self.offsetX) + "   Y:" + str(self.offsetY))
-                print("X: " + str(offsetX) + "   Y:" + str(offsetY))
                 if (offsetX + offsetY) - (self.offsetX + self.offsetY) > 0:
                     self.shiftNumber += 1
                 else:
@@ -112,6 +110,8 @@ class letter(window.window):
                 else:
                     self.input_text = '25'
                     self.shiftNumber = 25
+            elif event.key == pygame.K_ESCAPE:
+                return((True, None))
         
         
         
