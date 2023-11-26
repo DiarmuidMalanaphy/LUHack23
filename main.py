@@ -13,7 +13,7 @@ class main:
 
 
         pygame.init()
-        SCREEN_WIDTH = 1280
+        SCREEN_WIDTH = 1240
         SCREEN_HEIGHT = 720
         
         self.screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
