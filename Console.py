@@ -1,26 +1,29 @@
 import pygame
 import window
 import time
+from packet_Sniffing import packetSniffing
 
 
 class Console(window.window):
 
-    def __init__(self):
-        self.cTxt = ["Server Console"]    # Console Text
-        self.cLine = "> "               # Console line (current)
+    def __init__(self, screen):
+        self.cTxt = ["Server Console"]      # Console Text
+        self.prompt = ">"
+        self.cLine = self.prompt + " "      # Console line (current)
         self.width = 800
         self.height = 600
         self.consoleScreen = pygame.display.set_mode((self.width, self.height))
+        self.screen = screen
 
     def add2Console(self, lines):
         for line in lines:
             self.cTxt.append(line)
-        self.display()
+        self.display(self.screen)
 
     def display(self, screen):
         self.consoleScreen.fill((0, 0, 0))
         # font = pygame.font.Font("Monospace", 32)
-        font = pygame.font.Font(None, 32)
+        font = pygame.font.Font(None, 24)
 
         lineGap = 8         # Pixels between each line
         _, fonth = font.size("a")
@@ -79,8 +82,8 @@ class Console(window.window):
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
                 self.cTxt.append(self.cLine)
-                self.processCmd(self.cLine)
-                self.cLine = "> "
+                self.processCmd(self.cLine[2:])
+                self.cLine = self.prompt + " "
             elif event.key == pygame.K_TAB:
                 # Autocomplete?
                 pass
@@ -91,4 +94,29 @@ class Console(window.window):
                 self.cLine += event.unicode
 
     def processCmd(self, cmd):
+        cmd = cmd.split(" ")
+        print(cmd)
+        match cmd[0]:
+            case "":
+                pass
+            case "help":
+                self.add2Console([
+                    "HELP MENU",
+                    "    packetSniffer        Prints out a list of packet data to the console, or packets sent by a specific IP",
+                    "                                      Usage: packetSniffer %ip%;  E.g. packetSniffer 248.171.41.105"
+                    ])
+            case "packetSniffer":
+                if len(cmd) == 1:
+                    pList = packetSniffing().createPacketList()
+                    for packet in pList:
+                        self.add2Console([packet])
+                else:
+                    packets = packetSniffing().search(cmd[1])
+                    if len(packets) == 0:
+                        self.add2Console(["Nothing found!"])
+                    else:
+                        for packet in packets:
+                            self.add2Console([packet])
+            case other:
+                self.add2Console(["Command not found! Type \"help\" (without quotes) for more information."])
         pass
