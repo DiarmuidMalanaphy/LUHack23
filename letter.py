@@ -49,12 +49,7 @@ class letter(window.window):
 
             
                 
-                sound.play()
-                time.sleep(1)
-                sound.set_volume(0.6)
-                time.sleep(1)
-                sound.set_volume(0.8)
-                time.sleep(1)
+                
 
                 # Restore the volume if needed
                 sound.set_volume(1.0)
