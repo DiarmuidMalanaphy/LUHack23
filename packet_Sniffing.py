@@ -1,3 +1,4 @@
+import os
 import random
 import window
 import pygame
@@ -57,12 +58,24 @@ class packetSniffing(window.window):
     def createPacketList(self):
         pleasantries = []
 
-        with open('pleasantries.csv', 'r') as file:
-            # Read the entire file content
-            content = file.read()
+        try:
 
-            # Split the content by comma and strip extra spaces and quotes
-            pleasantries = [item.strip().strip('"') for item in content.split(',')]
+
+            with open('pleasantries.csv', 'r') as file:
+                # Read the entire file content
+                content = file.read()
+
+                # Split the content by comma and strip extra spaces and quotes
+                pleasantries = [item.strip().strip('"') for item in content.split(',')]
+            
+        except Exception:
+            with open('horrible.csv', 'r') as file:
+                # Read the entire file content
+                content = file.read()
+
+                # Split the content by comma and strip extra spaces and quotes
+                pleasantries = [item.strip().strip('"') for item in content.split(',')]
+            
 
         packets = []
         for  pleasantry in pleasantries:

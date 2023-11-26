@@ -1,3 +1,4 @@
+import os
 import pygame
 import numpy
 from Console import Console
@@ -16,10 +17,19 @@ class main:
         SCREEN_HEIGHT = 720
         
         self.screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
-        
+
+        try:
+            os.rename('doorOpening1.mp3', 'doorOpening.mp3')
+        except:
+            pass
+        try:
+            os.rename('pleasantries1.csv',"pleasantries.csv")
+        except:
+            pass
         pygame.display.set_caption("Hopkins Secret")
         icon_image = pygame.image.load("hopkinsSecret.jpg").convert()
         pygame.display.set_icon(icon_image)
+        
         
         
         clock = pygame.time.Clock()
@@ -36,7 +46,7 @@ class main:
             # MAIN GAME LOOP
             dt = clock.tick(60)
             #dt = dt/40
-            
+            currentWindow.display(self.screen)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
@@ -58,7 +68,7 @@ class main:
             # Get state of all keys
             keys = pygame.key.get_pressed()
             # self.screen.fill((0, 0, 0))
-            currentWindow.display(self.screen)
+            
             
             if clock_started:
                 mins, secs = divmod(int(time_remaining), 60)
