@@ -14,13 +14,12 @@ class packetSniffing(window.window):
     
     def __init__(self):
         self.packets = self.createPacketList()
-        truepacket = self.create_fake_packet("Hello, the secret code is 300!","192.88.247.82")
+        truepacket = self.create_fake_packet("Hello, the secret code is 200!","192.88.247.82")
         hopkinPacket = self.create_fake_packet("Hopkins has done something","192.88.247.82")
         
         self.packets[43] = truepacket
         self.packets[12] = hopkinPacket
-        print(self.search("192.88.247.82"))
-        #print(self.packets)
+        
         
         
 

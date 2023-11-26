@@ -5,7 +5,7 @@ class forensic(window.window):
         self.backgroundImg = pygame.image.load("translatepic.png")
         # self.font = pygame.font.Font("Pixtura12.ttf", 36)
         self.text = "Forensic ling puzzle text here"
-        self.arrowImage = pygame.image.load("Arrow.png")
+        self.arrowImage = pygame.image.load("whiteArrow.png")
         self.input_text = ""
         self.guess = ""
         self.solution = "192.88.247.82"
@@ -30,7 +30,7 @@ class forensic(window.window):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.backArrowButton.collidepoint(event.pos):
                 # Perform an action when the button is clicked
-                print("Back arrow clicked!")
+                return(True,None)
             #     self.textboxActive = False
             # elif self.textbox.collidepoint(event.pos):
             #     self.textboxActive = True

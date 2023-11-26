@@ -4,6 +4,7 @@ import numpy
 from Console import Console
 
 from door import door
+from finalScene import finalScene
 from forensic import forensic
 from windowManager import windowManager
 
@@ -41,7 +42,15 @@ class main:
         self.font = pygame.font.Font(None, 60)
         clock_started = False
         time_remaining = 20*60
+        pygame.mixer.init()
+        sound = pygame.mixer.Sound("Intro.mp3")#
+           
+        sound.set_volume(0.7)
+        sound.play()
         while running:
+
+            
+
             currentWindow = manager.getCurrentWindow()
             # MAIN GAME LOOP
             dt = clock.tick(60)
