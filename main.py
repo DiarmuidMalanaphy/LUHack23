@@ -1,27 +1,21 @@
 import os
 import pygame
-import numpy
-from Console import Console
-from Padlock import Padlock
-
 from door import door
-from finalScene import finalScene
-from forensic import forensic
 from windowManager import windowManager
 
-class main:
-    
-    def __init__(self):
 
+class main:
+
+    def __init__(self):
 
         pygame.init()
         SCREEN_WIDTH = 1240
         SCREEN_HEIGHT = 720
-        
+
         self.screen = pygame.display.set_mode([SCREEN_WIDTH, SCREEN_HEIGHT])
 
         try:
-            os.rename('doorOpening1.mp3', 'doorOpening.mp3')
+            os.rename('./assets/audio/doorOpening1.mp3', './assets/audio/doorOpening.mp3')
         except:
             pass
         try:
@@ -29,54 +23,46 @@ class main:
         except:
             pass
         pygame.display.set_caption("Hopkins Secret")
-        icon_image = pygame.image.load("hopkinsSecret.jpg").convert()
+        icon_image = pygame.image.load("./assets/images/hopkinsSecret.jpg").convert()
         pygame.display.set_icon(icon_image)
-        
-        
-        
+
+
         clock = pygame.time.Clock()
-        
-        
-        
+
+
         running = True
-        manager = windowManager(finalScene())
+        manager = windowManager(door())
         self.font = pygame.font.Font(None, 60)
         clock_started = False
         time_remaining = 20*60
         pygame.mixer.init()
-        sound = pygame.mixer.Sound("Intro.mp3")#
-           
+        sound = pygame.mixer.Sound("./assets/audio/Intro.mp3")#
+
         sound.set_volume(0.7)
         sound.play()
+        # MAIN GAME LOOP
         while running:
             currentWindow = manager.getCurrentWindow()
-            # MAIN GAME LOOP
             dt = clock.tick(60)
-            #dt = dt/40
             currentWindow.display(self.screen)
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     running = False
-                #Cursed but might work, will always return None
+                # Cursed but might work, will always return None
                 new_window = currentWindow.check_event(event)
-                
+
                 if new_window is not None and not clock_started:
                     if new_window[1] is None:
                         clock_started = True
-                    
-                
+
                 manager.changeCurrentWindow(new_window)
+
             if clock_started:
                     time_remaining -= dt / 1000.0
-                
-                    
-                                  
-                      
+
             # Get state of all keys
             keys = pygame.key.get_pressed()
-            # self.screen.fill((0, 0, 0))
-            
-            
+
             if clock_started:
                 mins, secs = divmod(int(time_remaining), 60)
                 timer_text = '{:02d}:{:02d}'.format(mins, secs)
@@ -92,16 +78,10 @@ class main:
                 y_position = 50  # Gap from the top
                 timer_surface.blit(text_surface, (0, 0))
                 self.screen.blit(timer_surface, (x_position, y_position))
-            
-
-            # Blit the timer surface onto the main screen
-            
 
             pygame.display.flip()
-            
 
-
-        # Done! Time to quit.
         pygame.quit()
+
 
 game = main()
