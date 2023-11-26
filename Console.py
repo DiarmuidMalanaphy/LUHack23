@@ -9,11 +9,13 @@ class Console(window.window):
 
     def __init__(self):
         self.cTxt = ["Server Console"]      # Console Text
-        self.prompt = ">"
-        self.cLine = self.prompt + " "      # Console line (current)
+        self.prompt = "login >"
         self.width = 1240
         self.height = 720#
         self.original_size = (pygame.display.get_window_size())
+        self.loggedin = False
+        self.loginPass = ""
+        self.cLine= self.prompt + " "
         #self.consoleScreen = pygame.display.set_mode((self.width, self.height))
         
 
@@ -85,27 +87,49 @@ class Console(window.window):
         time.sleep(0.01)
 
     def check_event(self, event):
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RETURN:
-                self.cTxt.append(self.cLine)
-                bool = self.processCmd(self.cLine[2:])
-                if bool: # To break the commandline
-                    
-                    pygame.display.set_mode((self.original_size))
-                    try:
-                        os.rename('pleasantries.csv','pleasantries1.csv')
-                    except:
-                        pass
-                    return(True,None)
-                self.cLine = self.prompt + " "
-            elif event.key == pygame.K_TAB:
-                # Autocomplete?
-                pass
-            elif event.key == pygame.K_BACKSPACE:
-                if len(self.cLine) != 2:
-                    self.cLine = self.cLine[:-1]
-            else:
-                self.cLine += event.unicode
+        if self.loggedin:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    self.cTxt.append(self.cLine)
+                    bool = self.processCmd(self.cLine[9:])
+                    if bool: # To break the commandline
+                        
+                        pygame.display.set_mode((self.original_size))
+                        try:
+                            os.rename('pleasantries.csv','pleasantries1.csv')
+                        except:
+                            pass
+                        return(True,None)
+                    self.cLine = self.prompt + " "
+                elif event.key == pygame.K_TAB:
+                    # Autocomplete?
+                    pass
+                elif event.key == pygame.K_BACKSPACE:
+                    if len(self.cLine) != 2:
+                        self.cLine = self.cLine[:-1]
+                else:
+                    self.cLine += event.unicode
+        else:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    print(self.loginPass)
+                    if self.loginPass == "39000":
+                        self.loggedin = True
+                        self.prompt = "server >"
+                        self.add2Console([self.cLine])
+                        self.add2Console(["Login successful"])
+                    else:
+                        self.add2Console([self.cLine])
+                        self.add2Console(["Incorrect password!"])
+                        self.loginPass = ""
+                    self.cLine = self.prompt + " "      # Console line (current)
+                elif event.key == pygame.K_BACKSPACE:
+                    self.loginPass = self.loginPass[:-1]
+                    if len(self.cLine) != 2:
+                        self.cLine = self.cLine[:-1]
+                else:
+                    self.loginPass += event.unicode
+                    self.cLine += "*"
 
     def processCmd(self, cmd):
         cmd = cmd.split(" ")
