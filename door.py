@@ -1,6 +1,7 @@
 import pygame
 from letter import letter
 from monitor import monitor
+from Padlock import Padlock
 from vent import vent
 import window
 
@@ -10,9 +11,12 @@ class door(window.window):
         self.arrowImage = pygame.image.load('Arrow.png')
         self.paperSlipImage = pygame.image.load("paper_slip.png")  # Load the paper slip image
         self.paperSlipButton = None 
+        self.padlock = pygame.Rect(980, 450, 80, 100)
 
     def display(self, screen):
         screen.blit(self.backgroundImg, (0, 0))
+        
+        pygame.draw.rect(screen, (255, 255, 255), self.padlock)
 
         # Left Arrow Button
         self.leftArrowButton = self.arrowImage.get_rect(center=(screen.get_width() / 8, screen.get_height() *2 / 4 +10))
@@ -40,7 +44,8 @@ class door(window.window):
            
             if self.paperSlipButton and self.paperSlipButton.collidepoint(event.pos):
                 return(False,letter())
-               
+            if self.padlock.collidepoint(event.pos):
+                return(False, Padlock())
                     
         
         if event.type == pygame.KEYDOWN:

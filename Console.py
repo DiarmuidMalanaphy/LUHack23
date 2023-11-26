@@ -11,10 +11,10 @@ class Console(window.window):
         self.cTxt = ["Server Console"]      # Console Text
         self.prompt = ">"
         self.cLine = self.prompt + " "      # Console line (current)
-        self.width = 800
-        self.height = 600#
+        self.width = 1240
+        self.height = 720#
         self.original_size = (pygame.display.get_window_size())
-        self.consoleScreen = pygame.display.set_mode((self.width, self.height))
+        #self.consoleScreen = pygame.display.set_mode((self.width, self.height))
         
 
     def add2Console(self, lines):
@@ -23,10 +23,12 @@ class Console(window.window):
         self.display(self.screen)
 
     def display(self, screen):
-        
         self.screen = screen
-        self.consoleScreen.fill((0, 0, 0))
-        # font = pygame.font.Font("Monospace", 32)
+        self.screen.blit(pygame.image.load("monitor.png"), (0,0))
+        bgOverlay = pygame.Surface((self.width, self.height))
+        bgOverlay.fill((0, 0, 0))
+        bgOverlay.set_alpha(230)
+        self.screen.blit(bgOverlay, (0,0))
         font = pygame.font.Font(None, 24)
 
         lineGap = 8         # Pixels between each line
