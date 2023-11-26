@@ -127,6 +127,9 @@ class Console(window.window):
                     self.loginPass = self.loginPass[:-1]
                     if len(self.cLine) != 2:
                         self.cLine = self.cLine[:-1]
+                elif event.key == pygame.K_ESCAPE:
+                    if self.processCmd("exit"):
+                        return(True, None)
                 else:
                     self.loginPass += event.unicode
                     self.cLine += "*"
@@ -160,4 +163,3 @@ class Console(window.window):
                 return(True)
             case other:
                 self.add2Console(["Command not found! Type \"help\" (without quotes) for more information."])
-        pass
